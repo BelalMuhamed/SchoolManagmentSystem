@@ -27,6 +27,7 @@ namespace School.Modules
         [Phone]
         public string Phone { get; set; }
         [EmailAddress]
+        
         public string Email { get; set; }
         public string Role { get; set; }
         [PasswordPropertyText]

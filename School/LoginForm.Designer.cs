@@ -95,6 +95,7 @@
             button2.TabIndex = 6;
             button2.Text = "Sign Up !";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label4
             // 
@@ -166,15 +167,16 @@
             // close_btn
             // 
             close_btn.Anchor = AnchorStyles.None;
+            close_btn.AutoSize = true;
             close_btn.BackColor = Color.CornflowerBlue;
             close_btn.Cursor = Cursors.Hand;
             close_btn.FlatStyle = FlatStyle.Flat;
             close_btn.Font = new Font("Ravie", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             close_btn.ForeColor = SystemColors.ActiveCaptionText;
-            close_btn.Location = new Point(1317, 25);
+            close_btn.Location = new Point(1339, 13);
             close_btn.Margin = new Padding(3, 4, 3, 4);
             close_btn.Name = "close_btn";
-            close_btn.Size = new Size(34, 33);
+            close_btn.Size = new Size(38, 34);
             close_btn.TabIndex = 11;
             close_btn.Text = "X";
             close_btn.UseVisualStyleBackColor = false;
@@ -212,6 +214,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
             ResumeLayout(false);
             PerformLayout();

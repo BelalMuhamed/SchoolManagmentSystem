@@ -45,7 +45,7 @@ namespace School
             else
             {
                 timer.Stop();
-                LoginForm lg_form = new LoginForm();
+                LoginForm lg_form = new LoginForm(this);
                 lg_form.Show();
                 this.Hide(); 
                

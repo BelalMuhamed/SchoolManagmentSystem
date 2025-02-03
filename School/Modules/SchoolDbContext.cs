@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using SchoolDAL.Modules;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,13 @@ namespace School.Modules
         public DbSet<TeacherAttendance> TeachersAttendance { get; set; }
         public DbSet<TeacherClassSubject> EnrolllmentTeacherClassSubject { get; set; }
         public DbSet<user> users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+            modelBuilder.Entity<user>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+        }
 
     }
 }

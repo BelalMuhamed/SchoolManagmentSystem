@@ -16,8 +16,12 @@ namespace School
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        LoadingForm _LoadingForm;
+        public LoginForm(LoadingForm f) : base()
         {
+            _LoadingForm = f;
+
+
             InitializeComponent();
         }
 
@@ -32,8 +36,8 @@ namespace School
             var password = txt_pass.Text;
             var con = new SqlConnection("Server=DESKTOP-BE6MD1V;Database=SchoolDb;Trusted_Connection=True;Trust Server Certificate=True");
             user u = con.QueryFirstOrDefault<user>("select * from users where Email = @Email and Password=@password", new { Email = email, password = password });
-            
-            if (u != null) 
+
+            if (u != null)
             {
                 if (u.Role == "admin")
                 {
@@ -51,16 +55,30 @@ namespace School
 
         }
 
-
+        public void closeForms()
+        {
+            _LoadingForm.Close();
+            this.Close();
+        }
 
         private void close_btn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            closeForms();
         }
 
         private void txt_mail_TextChanged(object sender, EventArgs e)
         {
             if (errorLbl.Visible) { errorLbl.Visible = false; }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Register register = new Register(this);
+            register.Show();
+            register.Location = this.Location;
+            register.Size= this.Size;
+            this.Hide();
+
         }
     }
 }
