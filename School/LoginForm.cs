@@ -17,6 +17,7 @@ namespace School
     public partial class LoginForm : Form
     {
         LoadingForm _LoadingForm;
+       public user u;
         public LoginForm(LoadingForm f) : base()
         {
             _LoadingForm = f;
@@ -35,7 +36,7 @@ namespace School
             var email = txt_mail.Text;
             var password = txt_pass.Text;
             var con = new SqlConnection("Server=DESKTOP-BE6MD1V;Database=SchoolDb;Trusted_Connection=True;Trust Server Certificate=True");
-            user u = con.QueryFirstOrDefault<user>("select * from users where Email = @Email and Password=@password", new { Email = email, password = password });
+             u = con.QueryFirstOrDefault<user>("select * from users where Email = @Email and Password=@password", new { Email = email, password = password });
 
             if (u != null)
             {
@@ -43,9 +44,13 @@ namespace School
                 {
 
                 }
-                else
+                else if(u.Role == "teacher")
                 {
-
+                    txt_mail.Text = "";
+                    txt_pass.Text = "";
+                    TeacherDashBoard f = new TeacherDashBoard(this);
+                    f.Show();
+                    this.Hide();
                 }
             }
             else
