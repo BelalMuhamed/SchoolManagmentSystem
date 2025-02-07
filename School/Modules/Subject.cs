@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolDAL.Modules
+namespace School.Modules
 {
     public class Subject
     {

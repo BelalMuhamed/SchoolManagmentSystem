@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolDAL.Modules
+namespace School.Modules
 {
     public class Teacher
     {
@@ -34,7 +34,7 @@ namespace SchoolDAL.Modules
         [ForeignKey("Subject")]
         public int? SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
-        public virtual Class Class { get; set; }
+        public virtual List<Class> Classes { get;  }=new List<Class>();
         public virtual List<TeacherClassSubject> lesson { get; } = new List<TeacherClassSubject>();
         public virtual List<TeacherAttendance> teachersattend { get; } = new List<TeacherAttendance>();
     }

@@ -30,7 +30,17 @@ namespace School.Modules
             modelBuilder.Entity<user>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            modelBuilder.Entity<Class>()
+            .HasOne(c => c.Manager)
+            .WithMany(t => t.Classes)
+            .HasForeignKey(c => c.ManagerId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+            base.OnModelCreating(modelBuilder);
         }
+       
+        
 
     }
 }

@@ -42,7 +42,11 @@ namespace School
             {
                 if (u.Role == "admin")
                 {
-
+                    txt_mail.Text = "";
+                    txt_pass.Text = "";
+                    AdminDashBoard fadmin = new AdminDashBoard(this);
+                    fadmin.Show();
+                    this.Hide();
                 }
                 else if(u.Role == "teacher")
                 {

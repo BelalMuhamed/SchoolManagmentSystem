@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using School.Modules;
 using System.Windows.Forms;
 
-namespace SchoolDAL.Modules
+namespace School.Modules
 {
     [PrimaryKey(nameof(date), nameof(Lesson))]
 

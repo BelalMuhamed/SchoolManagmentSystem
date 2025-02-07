@@ -41,7 +41,7 @@ namespace School
 
 
         }
-       //close  btn
+        //close  btn
         private void button1_Click(object sender, EventArgs e)
         {
             form.closeforms();
@@ -96,6 +96,13 @@ namespace School
         {
             form.loginForm.Show();
             form.Close();
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            form.Show();
+
             this.Close();
         }
     }

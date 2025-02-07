@@ -40,6 +40,7 @@
             button2 = new Button();
             stdegree = new Label();
             stname = new Label();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgv_degrees).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -213,12 +214,30 @@
             stname.Size = new Size(0, 26);
             stname.TabIndex = 40;
             // 
+            // button3
+            // 
+            button3.Anchor = AnchorStyles.None;
+            button3.BackColor = Color.CornflowerBlue;
+            button3.Cursor = Cursors.Hand;
+            button3.FlatStyle = FlatStyle.Popup;
+            button3.Font = new Font("Ravie", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.ForeColor = SystemColors.ButtonHighlight;
+            button3.Location = new Point(32, 839);
+            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(163, 33);
+            button3.TabIndex = 43;
+            button3.Text = "Dash Board";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
             // TeacherManageDegree
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(1791, 885);
+            Controls.Add(button3);
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(btn_Schedule);
@@ -254,5 +273,6 @@
         private Button button2;
         private Label stdegree;
         private Label stname;
+        private Button button3;
     }
 }

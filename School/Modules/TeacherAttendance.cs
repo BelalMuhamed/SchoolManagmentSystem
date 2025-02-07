@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using School.Modules;
 
-namespace SchoolDAL.Modules
+namespace School.Modules
 {
     [PrimaryKey(nameof(day), nameof(TeacherId))]
 
