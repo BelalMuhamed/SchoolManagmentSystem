@@ -32,7 +32,6 @@
             btnsignout = new Button();
             dgv_degrees = new DataGridView();
             comboBox1 = new ComboBox();
-            datepickerfrom = new DateTimePicker();
             btn_Schedule = new Button();
             label2 = new Label();
             degreeadded = new TextBox();
@@ -82,8 +81,6 @@
             // 
             // dgv_degrees
             // 
-            dgv_degrees.AllowUserToAddRows = false;
-            dgv_degrees.AllowUserToDeleteRows = false;
             dgv_degrees.Anchor = AnchorStyles.None;
             dgv_degrees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_degrees.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -100,29 +97,17 @@
             dgv_degrees.Size = new Size(968, 377);
             dgv_degrees.TabIndex = 33;
             dgv_degrees.RowHeaderMouseClick += dgv_degrees_RowHeaderMouseClick;
+            dgv_degrees.SelectionChanged += dgv_degrees_SelectionChanged;
             // 
             // comboBox1
             // 
             comboBox1.BackColor = SystemColors.InfoText;
             comboBox1.ForeColor = Color.CornflowerBlue;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(514, 211);
+            comboBox1.Location = new Point(717, 172);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(251, 28);
             comboBox1.TabIndex = 35;
-            // 
-            // datepickerfrom
-            // 
-            datepickerfrom.Anchor = AnchorStyles.None;
-            datepickerfrom.CalendarForeColor = SystemColors.ButtonHighlight;
-            datepickerfrom.CalendarMonthBackground = Color.CornflowerBlue;
-            datepickerfrom.CalendarTitleBackColor = Color.CornflowerBlue;
-            datepickerfrom.CalendarTrailingForeColor = SystemColors.ButtonHighlight;
-            datepickerfrom.Location = new Point(950, 212);
-            datepickerfrom.Name = "datepickerfrom";
-            datepickerfrom.Size = new Size(250, 27);
-            datepickerfrom.TabIndex = 36;
-            datepickerfrom.Value = new DateTime(2025, 2, 4, 0, 0, 0, 0);
             // 
             // btn_Schedule
             // 
@@ -137,7 +122,7 @@
             btn_Schedule.Name = "btn_Schedule";
             btn_Schedule.Size = new Size(401, 33);
             btn_Schedule.TabIndex = 37;
-            btn_Schedule.Text = "Show Schedule";
+            btn_Schedule.Text = "Show students ";
             btn_Schedule.UseVisualStyleBackColor = false;
             btn_Schedule.Click += btn_Schedule_Click;
             // 
@@ -146,7 +131,7 @@
             label2.Anchor = AnchorStyles.None;
             label2.AutoSize = true;
             label2.Font = new Font("Showcard Gothic", 12F, FontStyle.Italic);
-            label2.Location = new Point(398, 212);
+            label2.Location = new Point(608, 174);
             label2.Name = "label2";
             label2.Size = new Size(67, 26);
             label2.TabIndex = 38;
@@ -241,7 +226,6 @@
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(btn_Schedule);
-            Controls.Add(datepickerfrom);
             Controls.Add(comboBox1);
             Controls.Add(dgv_degrees);
             Controls.Add(btnsignout);
@@ -265,7 +249,6 @@
         private Button btnsignout;
         private DataGridView dgv_degrees;
         private ComboBox comboBox1;
-        private DateTimePicker datepickerfrom;
         private Button btn_Schedule;
         private Label label2;
         private TextBox degreeadded;

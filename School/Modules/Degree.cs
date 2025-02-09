@@ -14,9 +14,9 @@ namespace School.Modules
         [Key]
         public int DegreeId { get; set; }
         [ForeignKey("Student")]
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
         [ForeignKey("subject")]
-        public int SubId { get; set; }
+        public int? SubId { get; set; }
         [Column(TypeName = "money")]
         public decimal? mark { get; set; }
         public virtual Student Student { get; set; }

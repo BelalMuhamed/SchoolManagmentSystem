@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using School.Modules;
 
@@ -11,9 +12,11 @@ using School.Modules;
 namespace School.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250207151525_v011")]
+    partial class v011
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,10 +56,10 @@ namespace School.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DegreeId"));
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubId")
+                    b.Property<int>("SubId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("mark")
@@ -314,11 +317,15 @@ namespace School.Migrations
                 {
                     b.HasOne("School.Modules.Student", "Student")
                         .WithMany("studentdegrees")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("School.Modules.Subject", "subject")
                         .WithMany("studentdegrees")
-                        .HasForeignKey("SubId");
+                        .HasForeignKey("SubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
 

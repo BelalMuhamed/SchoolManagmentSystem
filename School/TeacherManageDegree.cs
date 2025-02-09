@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using School.Modules;
 using School.VM;
 using SchoolDAL.Modules;
@@ -11,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace School
 {
@@ -49,12 +53,45 @@ namespace School
         }
 
         //choose class and date to update data grid view
+        List<DegreeViewModel> AllStudentInClass;
         private void btn_Schedule_Click(object sender, EventArgs e)
         {
-            var stuinclass = context.Degrees.Include(d => d.Student).Where(s => s.Student.classId == (int)comboBox1.SelectedValue)
-                 .Join(context.StudentsAttendance.Where(d => d.day == datepickerfrom.Value), d => d.StudentId, a => a.StudentId, (d, a) => new { a.StudentId, a.day, StudentName = $"{d.Student.FirstName}{d.Student.LastName}", TotalMarks = d.mark, a.status }).ToList();
-            dgv_degrees.DataSource = stuinclass;
+            List<Student> students = context.students.Where(s => s.classId == (int)comboBox1.SelectedValue).ToList();
+
+            List<int?> existingStudentIds = context.Degrees.Where(d => d.SubId == teacher.SubjectId && d.Student.classId == (int)comboBox1.SelectedValue).Select(d => d.StudentId).ToList();
+            List<Student> studentsToAdd = students
+            .Where(s => !existingStudentIds.Contains(s.StudentID))
+                .ToList();
+
+
+            foreach (var student in studentsToAdd)
+            {
+                context.Degrees.Add(new Degree
+                {
+                    StudentId = student.StudentID,
+                    SubId = teacher.SubjectId,
+                    mark = 0
+                });
+            }
+
+
+            context.SaveChanges();
+
+            AllStudentInClass = context.Degrees.Include(d => d.Student).Where(d => d.SubId == teacher.SubjectId && d.Student.classId == (int)comboBox1.SelectedValue).Select(s => new DegreeViewModel
+            {
+                DegreeId = s.DegreeId,
+                SubId = s.SubId,
+                studentname = s.Student.FirstName + s.Student.LastName,
+                StudentId = s.StudentId,
+                mark = s.mark
+            }).ToList();
+
+            dgv_degrees.DataSource = AllStudentInClass;
             dgv_degrees.Columns["StudentId"].Visible = false;
+            dgv_degrees.Columns["SubId"].Visible = false;
+            dgv_degrees.Columns["DegreeId"].Visible = false;
+
+
 
 
         }
@@ -63,24 +100,32 @@ namespace School
         private void dgv_degrees_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            id = Convert.ToInt32(dgv_degrees.Rows[rowIndex].Cells[0].Value);
-            stname.Text = (dgv_degrees.Rows[rowIndex].Cells[2].Value).ToString();
-            stdegree.Text = (dgv_degrees.Rows[rowIndex].Cells[3].Value).ToString();
+            id = Convert.ToInt32(dgv_degrees.Rows[rowIndex].Cells["DegreeId"].Value);
+            stname.Text = (dgv_degrees.Rows[rowIndex].Cells["studentname"].Value).ToString();
+            stdegree.Text = (dgv_degrees.Rows[rowIndex].Cells["mark"].Value).ToString();
 
         }
         //update student degree
         private void button2_Click(object sender, EventArgs e)
         {
-            Degree s = context.Degrees.Where(s => s.StudentId == id).FirstOrDefault();
+            Degree s = context.Degrees.Where(d => d.DegreeId == id).FirstOrDefault();
             decimal? addeddegree = string.IsNullOrEmpty(degreeadded.Text) ? (decimal?)0 : Convert.ToDecimal(degreeadded.Text);
             s.mark = s.mark + addeddegree;
             context.Degrees.Update(s);
             context.SaveChanges();
             stname.Text = stdegree.Text = degreeadded.Text = "";
-            var stuinclass = context.Degrees.Include(d => d.Student).Where(s => s.Student.classId == (int)comboBox1.SelectedValue)
-                .Join(context.StudentsAttendance.Where(d => d.day == datepickerfrom.Value), d => d.StudentId, a => a.StudentId, (d, a) => new { a.StudentId, a.day, StudentName = $"{d.Student.FirstName}{d.Student.LastName}", TotalMarks = d.mark, a.status }).ToList();
-            dgv_degrees.DataSource = stuinclass;
+            AllStudentInClass = context.Degrees.Include(d => d.Student).Where(d => d.SubId == teacher.SubjectId && d.Student.classId == (int)comboBox1.SelectedValue).Select(s => new DegreeViewModel
+            {
+                DegreeId = s.DegreeId,
+                SubId = s.SubId,
+                studentname = s.Student.FirstName + s.Student.LastName,
+                StudentId = s.StudentId,
+                mark = s.mark
+            }).ToList();
+            dgv_degrees.DataSource = AllStudentInClass;
             dgv_degrees.Columns["StudentId"].Visible = false;
+            dgv_degrees.Columns["SubId"].Visible = false;
+            dgv_degrees.Columns["DegreeId"].Visible = false;
 
         }
         //handle numeric values in degree text
@@ -104,6 +149,14 @@ namespace School
             form.Show();
 
             this.Close();
+        }
+
+        private void dgv_degrees_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgv_degrees.CurrentCell != null)
+            {
+                dgv_degrees.CurrentCell.Selected = true; 
+            }
         }
     }
 }

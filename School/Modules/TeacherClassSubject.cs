@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace School.Modules
 {
-    [PrimaryKey(nameof(date), nameof(Lesson))]
+    [PrimaryKey(nameof(date), nameof(Lesson),nameof(classId),nameof(TeacherId))]
 
     public class TeacherClassSubject
     {
@@ -28,8 +28,8 @@ namespace School.Modules
 
         public int SubjectId { get; set; }
 
-        public virtual Teacher Teacher { get; set; }
+        public virtual Teacher? Teacher { get; set; }
         public virtual Subject? Subject { get; set; }
-        public virtual Class classs { get; set; }
+        public virtual Class? classs { get; set; }
     }
 }

@@ -369,7 +369,7 @@
             panel2.Controls.Add(btn_teachers);
             panel2.Location = new Point(974, 279);
             panel2.Name = "panel2";
-            panel2.Size = new Size(818, 408);
+            panel2.Size = new Size(780, 408);
             panel2.TabIndex = 36;
             // 
             // btnusers
@@ -380,7 +380,7 @@
             btnusers.FlatStyle = FlatStyle.Popup;
             btnusers.Font = new Font("Ravie", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnusers.ForeColor = SystemColors.ButtonHighlight;
-            btnusers.Location = new Point(430, 226);
+            btnusers.Location = new Point(411, 226);
             btnusers.Margin = new Padding(3, 4, 3, 4);
             btnusers.Name = "btnusers";
             btnusers.Size = new Size(251, 138);
@@ -397,7 +397,7 @@
             classes.FlatStyle = FlatStyle.Popup;
             classes.Font = new Font("Ravie", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             classes.ForeColor = SystemColors.ButtonHighlight;
-            classes.Location = new Point(430, 35);
+            classes.Location = new Point(411, 35);
             classes.Margin = new Padding(3, 4, 3, 4);
             classes.Name = "classes";
             classes.Size = new Size(251, 138);
@@ -413,7 +413,7 @@
             btnstudent.FlatStyle = FlatStyle.Popup;
             btnstudent.Font = new Font("Ravie", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnstudent.ForeColor = SystemColors.ButtonHighlight;
-            btnstudent.Location = new Point(106, 226);
+            btnstudent.Location = new Point(87, 226);
             btnstudent.Margin = new Padding(3, 4, 3, 4);
             btnstudent.Name = "btnstudent";
             btnstudent.Size = new Size(251, 138);
@@ -429,7 +429,7 @@
             btn_teachers.FlatStyle = FlatStyle.Popup;
             btn_teachers.Font = new Font("Ravie", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btn_teachers.ForeColor = SystemColors.ButtonHighlight;
-            btn_teachers.Location = new Point(106, 35);
+            btn_teachers.Location = new Point(87, 35);
             btn_teachers.Margin = new Padding(3, 4, 3, 4);
             btn_teachers.Name = "btn_teachers";
             btn_teachers.Size = new Size(251, 138);
